@@ -7,7 +7,7 @@ const os = require("os");
 
 const PORT = Number(process.env.PORT) || 3000;
 const HOST = "0.0.0.0";
-const PUBLIC_DIR = path.join(__dirname, "public");
+const PUBLIC_DIR = __dirname;;
 const DATA_FILE = path.join(__dirname, "orders.json");
 const STATUSES = ["Pending", "Accepted", "Ready", "Delivered"];
 
