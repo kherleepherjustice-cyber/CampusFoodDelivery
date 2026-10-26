@@ -1,49 +1,82 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#123b2b">
-  <title>FUDMA Campus Food & Mini Mart | Group 8</title>
+  <meta name="theme-color" content="#15803d">
+  <meta name="description" content="FUDMA Campus Food Delivery and Mini Mart System - Group 8">
+  <title>FUDMA Campus Food &amp; Mini Mart | Group 8</title>
   <link rel="stylesheet" href="/style.css">
-<link rel="manifest" href="/manifest.json">
-<link rel="apple-touch-icon" href="/icon-192.png">
-<meta name="theme-color" content="#15803d">
 </head>
 <body>
   <header class="hero">
     <div class="hero-inner">
       <div class="brand-mark">FUDMA</div>
       <p class="eyebrow">FEDERAL UNIVERSITY DUTSIN-MA · KATSINA STATE</p>
-      <h1>Campus Food Delivery <span>& Mini Mart</span></h1>
-      <p class="subtitle">Group 8 Mini Project · FUDMA-GET 411: Artificial Intelligence Applications in Engineering</p>
+      <h1>Campus Food Delivery <span>&amp; Mini Mart</span></h1>
+      <p class="subtitle">
+        Group 8 Mini Project · FUDMA-GET 411:
+        Artificial Intelligence Applications in Engineering
+      </p>
       <div class="hero-actions">
         <a class="button button-light" href="#menu">Explore Menu</a>
-        <button class="button button-outline" id="openTracking">Track an Order</button>
+        <button class="button button-outline" id="openTracking" type="button">
+          Track an Order
+        </button>
       </div>
     </div>
   </header>
-
   <main class="page">
     <div id="notice" class="notice" role="status" aria-live="polite"></div>
+    <!-- MENU -->
     <section id="menu" class="section">
       <div class="section-heading">
-        <div><p class="eyebrow dark">ORDER ON CAMPUS</p><h2>What would you like?</h2></div>
-        <button id="openCart" class="button button-primary">Cart <span id="cartCount" class="count">0</span></button>
+        <div>
+          <p class="eyebrow dark">ORDER ON CAMPUS</p>
+          <h2>What would you like?</h2>
+        </div>
+        <button id="openCart" class="button button-primary" type="button">
+          Cart <span id="cartCount" class="count">0</span>
+        </button>
       </div>
-      <p class="muted">Choose a category to open its products. Add items to your cart, then submit your order.</p>
+      <p class="muted">
+        Choose a category to view its products. Add items to your cart,
+        then submit your order.
+      </p>
       <div id="categories" class="categories"></div>
     </section>
-
+    <!-- CART AND CHECKOUT -->
     <section id="cartPanel" class="section panel hidden">
-      <div class="section-heading"><div><p class="eyebrow dark">YOUR SELECTION</p><h2>Cart & Checkout</h2></div><button class="text-button" id="closeCart">Close</button></div>
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow dark">YOUR SELECTION</p>
+          <h2>Cart &amp; Checkout</h2>
+        </div>
+        <button class="text-button" id="closeCart" type="button">Close</button>
+      </div>
       <div id="cartItems"></div>
-      <div class="total-line"><span>Total</span><strong id="cartTotal">₦0</strong></div>
+      <div class="total-line">
+        <span>Total</span>
+        <strong id="cartTotal">₦0</strong>
+      </div>
       <form id="checkoutForm" class="form-grid">
-        <label>Full name<input name="customerName" required minlength="2" placeholder="Enter your name"></label>
-        <label>Student/staff matric ID<input name="customerMatric" required placeholder="e.g. ENG/2024/32102"></label>
-        <label>Phone number (optional)<input name="phone" type="tel" placeholder="Phone number"></label>
-        <label>Pickup location
+        <label>
+          Full name
+          <input name="customerName" required minlength="2"
+                 autocomplete="name" placeholder="Enter your name">
+        </label>
+        <label>
+          Student/staff matric ID
+          <input name="customerMatric" required
+                 placeholder="e.g. ENG/2024/32102">
+        </label>
+        <label>
+          Phone number (optional)
+          <input name="phone" type="tel"
+                 autocomplete="tel" placeholder="Phone number">
+        </label>
+        <label>
+          Pickup location
           <select name="pickupLocation" required>
             <option value="">Select pickup location...</option>
             <option value="Male Hostel">Male Hostel</option>
@@ -54,52 +87,111 @@
             <option value="Mini Mart Counter">Mini Mart Counter</option>
           </select>
         </label>
-        <label>Payment type
+        <label>
+          Payment type
           <select name="paymentType" required>
             <option value="Cash payment">Cash payment</option>
             <option value="Online payment">Online payment</option>
           </select>
         </label>
-        <label>Order note (optional)<input name="note" placeholder="e.g. less pepper"></label>
-        <button class="button button-primary full" type="submit">Place Order</button>
+        <label>
+          Order note (optional)
+          <input name="note" placeholder="e.g. less pepper">
+        </label>
+        <button class="button button-primary full" type="submit">
+          Place Order
+        </button>
       </form>
-      <p class="tiny muted">This project does not collect online payments yet. Payment integration can be added separately.</p>
+      <p class="tiny muted">
+        Online payments are not processed by this page yet.
+        Do not enter bank card details.
+      </p>
     </section>
-
+    <!-- ORDER TRACKING -->
     <section id="trackingPanel" class="section panel hidden">
-      <div class="section-heading"><div><p class="eyebrow dark">ORDER UPDATES</p><h2>Track an Order</h2></div><button class="text-button" id="closeTracking">Close</button></div>
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow dark">ORDER UPDATES</p>
+          <h2>Track an Order</h2>
+        </div>
+        <button class="text-button" id="closeTracking" type="button">
+          Close
+        </button>
+      </div>
       <form id="trackingForm" class="form-grid">
-        <label>Order ID<input name="orderId" required placeholder="Paste the order ID shown after checkout"></label>
-        <label>Student/staff matric ID<input name="customerMatric" required placeholder="Matric ID used at checkout"></label>
-        <button class="button button-primary full" type="submit">Check Order</button>
+        <label>
+          Order ID
+          <input name="orderId" required
+                 placeholder="Enter your order ID">
+        </label>
+        <label>
+          Student/staff matric ID
+          <input name="customerMatric" required
+                 placeholder="Matric ID used at checkout">
+        </label>
+        <button class="button button-primary full" type="submit">
+          Check Order
+        </button>
       </form>
-      <div id="trackingResult"></div>
+      <div id="trackingResult" aria-live="polite"></div>
       <form id="feedbackForm" class="form-grid hidden">
-        <label>Feedback about your order<textarea name="feedback" rows="3" required maxlength="1000" placeholder="Share your feedback"></textarea></label>
+        <label>
+          Feedback about your order
+          <textarea name="feedback" rows="3" required maxlength="1000"
+                    placeholder="Share your feedback"></textarea>
+        </label>
         <input type="hidden" name="orderId">
         <input type="hidden" name="customerMatric">
-        <button class="button button-primary full" type="submit">Submit Feedback</button>
+        <button class="button button-primary full" type="submit">
+          Submit Feedback
+        </button>
       </form>
     </section>
-
+    <!-- STAFF DASHBOARD -->
     <section id="staff" class="section staff-section">
-      <div class="staff-intro"><p class="eyebrow dark">AUTHORIZED GROUP MEMBERS</p><h2>Staff Dashboard</h2><p class="muted">Group members can sign in with an approved matriculation number to manage orders.</p></div>
+      <div class="staff-intro">
+        <p class="eyebrow dark">AUTHORIZED GROUP MEMBERS</p>
+        <h2>Staff Dashboard</h2>
+        <p class="muted">
+          Authorized group members can sign in to manage incoming orders.
+        </p>
+      </div>
       <form id="staffLoginForm" class="staff-login">
-        <label>Staff matriculation number<input name="matric" required placeholder="ENG/2024/32102" autocomplete="username"></label>
-        <button class="button button-dark" type="submit">Staff Login</button>
+        <label>
+          Staff matriculation number
+          <input name="matric" required
+                 placeholder="Enter your matric number"
+                 autocomplete="username">
+        </label>
+        <button class="button button-dark" type="submit">
+          Staff Login
+        </button>
       </form>
       <div id="staffDashboard" class="hidden">
-        <div class="section-heading"><div><h3>Incoming Orders</h3><p id="staffIdentity" class="muted"></p></div><div class="inline-actions"><button id="refreshOrders" class="button button-secondary">Refresh</button><button id="staffLogout" class="text-button">Log out</button></div></div>
+        <div class="section-heading">
+          <div>
+            <h3>Incoming Orders</h3>
+            <p id="staffIdentity" class="muted"></p>
+          </div>
+          <div class="inline-actions">
+            <button id="refreshOrders" class="button button-secondary"
+                    type="button">
+              Refresh
+            </button>
+            <button id="staffLogout" class="text-button" type="button">
+              Log out
+            </button>
+          </div>
+        </div>
         <div id="ordersList"></div>
       </div>
     </section>
   </main>
-  <footer><strong>FUDMA Group 8</strong><span>FUDMA-GET 411 · Artificial Intelligence Applications in Engineering</span><span>Student project prototype</span></footer>
+  <footer>
+    <strong>FUDMA Group 8</strong>
+    <span>FUDMA-GET 411 · Artificial Intelligence Applications in Engineering</span>
+    <span>Student project prototype</span>
+  </footer>
   <script src="/app.js" defer></script>
-<script>
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}));
-}
-</script>
 </body>
 </html>
